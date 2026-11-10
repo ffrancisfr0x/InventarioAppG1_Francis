@@ -13,7 +13,7 @@ public class LoginController implements Initializable {
 
     @javafx.fxml.FXML
     public void login(ActionEvent actionEvent) {
-        SceneNavigator.navigateTo("main-view.fxml","Main");
+        SceneNavigator.navigateTo(SceneNavigator.View.MAIN);
     }
 
     @Override
