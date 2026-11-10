@@ -50,7 +50,7 @@
             </FlowPane>
             <FlowPane>
                <children>
-                  <Button mnemonicParsing="false" onAction="#goBack" text="Volver atras" />
+                  <Button mnemonicParsing="false" onAction="#goBack" text="Cerrar sesión"/>
                </children>
             </FlowPane>
          </children>
