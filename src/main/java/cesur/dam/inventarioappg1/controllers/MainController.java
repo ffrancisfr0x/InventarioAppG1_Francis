@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -51,11 +52,20 @@ public class MainController implements Initializable {
             return new SimpleStringProperty(output);
         });
 
-        var dao = new EquipoJdbcDAO(DataSourceFactory.getDataSource());
-        dao.findAll().forEach( (equipo)->{
-            System.out.println(equipo);
-            table.getItems().add(equipo);
-        });
+        loadData();
+    }
+
+    private void loadData() {
+        try {
+            EquipoJdbcDAO dao = new EquipoJdbcDAO(DataSourceFactory.getDataSource());
+            table.getItems().setAll(dao.findAll());
+        } catch (RuntimeException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No se han podido cargar los equipos");
+            alert.setContentText(e.getMessage());
+            alert.show();
+        }
     }
 
     @FXML
