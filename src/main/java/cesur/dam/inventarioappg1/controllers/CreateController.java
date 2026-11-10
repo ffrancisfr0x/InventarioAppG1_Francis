@@ -1,6 +1,8 @@
 package cesur.dam.inventarioappg1.controllers;
 
 import cesur.dam.inventarioappg1.SceneNavigator;
+import cesur.dam.inventarioappg1.data.DataSourceFactory;
+import cesur.dam.inventarioappg1.data.EquipoJdbcDAO;
 import cesur.dam.inventarioappg1.models.Equipo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -64,30 +66,30 @@ public class CreateController implements Initializable {
         if (!isValid()) {
             return;
         }
+        Equipo equipo = new Equipo();
+        equipo.setNombre(txtName.getText().trim());
+        equipo.setCategoria(comboCategory.getValue());
+        equipo.setDisponible(chkAvailable.isSelected());
+
+        try {
+            EquipoJdbcDAO dao = new EquipoJdbcDAO(DataSourceFactory.getDataSource());
+            dao.save(equipo);
+        } catch (RuntimeException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No se ha podido guardar el equipo");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+            return;
+        }
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Guardar");
-        alert.setHeaderText("Guardando");
-
-        String name = txtName.getText();
-        String category = comboCategory.getValue();
-        String available = chkAvailable.isSelected() ? "disponible" : "no disponible";
-
-        alert.setContentText(name + " | " + category + " | " + available);
+        alert.setTitle("Guardado");
+        alert.setHeaderText("Equipo guardado correctamente");
+        alert.setContentText("Id " + equipo.getId() + " | " + equipo.getNombre() + " | " + equipo.getCategoria());
         alert.showAndWait();
-        txtName.clear();
 
-        Equipo equipment = new Equipo();
-        equipment.setNombre(name);
-        equipment.setCategoria(category);
-        equipment.setDisponible(chkAvailable.isSelected());
-//
-//        table.getItems().add(equipment);
-//
-//        table.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-//            System.out.println(oldValue+" | "+newValue);
-//        });
-
+        SceneNavigator.navigateTo(SceneNavigator.View.MAIN);
     }
 
     /**
