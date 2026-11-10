@@ -65,5 +65,6 @@ public class MainController implements Initializable {
 
     @FXML
     public void addNew(ActionEvent actionEvent) {
+        SceneNavigator.navigateTo(SceneNavigator.View.CREATE);
     }
 }
