@@ -7,42 +7,81 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Utility class for navigating between FXML views in the application.
+ * Controlador de navegación de la aplicación.
  * <p>
- * It holds a single shared {@link Stage} reference and swaps the scene shown on it
- * whenever a new view is requested. All members are static, so the navigator can be
- * used from anywhere without needing an instance.
+ * Guarda una referencia al {@link Stage} principal y cambia la escena que se
+ * muestra en él cada vez que se solicita una vista nueva. Todos sus miembros son
+ * estáticos, de modo que puede usarse desde cualquier controlador sin necesidad
+ * de crear una instancia.
+ * </p>
  */
 public class SceneNavigator {
 
     /**
-     * The main application stage on which scenes are displayed.
+     * Vistas disponibles en la aplicación, con su fichero FXML y el título de la ventana.
+     */
+    public enum View {
+        LOGIN("login-view.fxml", "Login"),
+        MAIN("main-view.fxml", "Inventario de equipos"),
+        CREATE("create-view.fxml", "Nuevo equipo");
+
+        private final String fxml;
+        private final String title;
+
+        View(String fxml, String title) {
+            this.fxml = fxml;
+            this.title = title;
+        }
+
+        public String getFxml() {
+            return fxml;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+    }
+
+    /**
+     * Stage principal de la aplicación sobre el que se muestran las escenas.
      */
     private static Stage stage;
 
     /**
-     * Registers the stage that will be used for subsequent scene navigation.
+     * Registra el stage que se usará en las siguientes navegaciones.
      *
-     * @param stage the main application {@link Stage}
+     * @param stage {@link Stage} principal de la aplicación
      */
     public static void setStage(Stage stage) {
         SceneNavigator.stage = stage;
     }
 
     /**
-     * Loads the given FXML view and displays it on the registered stage.
-     * <p>
-     * The FXML file is resolved relative to the {@code views/} package of {@link AppG1}.
+     * Muestra la vista indicada en el stage principal.
      *
-     * @param fxml  file name of the FXML view to load (resolved under {@code views/})
-     * @param title window title to set on the stage
-     * @throws RuntimeException if the FXML resource fails to load (wraps the {@link IOException})
+     * @param view vista a la que se quiere navegar
      */
-    public static void navigateTo(String fxml,String title){
-        FXMLLoader fxmlLoader = new FXMLLoader(AppG1.class.getResource("views/"+fxml));
-        Scene scene = null;
+    public static void navigateTo(View view) {
+        navigateTo(view.getFxml(), view.getTitle());
+    }
+
+    /**
+     * Carga la vista FXML indicada y la muestra en el stage registrado.
+     * <p>
+     * El fichero FXML se busca dentro del paquete {@code views/} de {@link AppG1}.
+     * Cada navegación crea una escena nueva, así que el controlador de la vista
+     * se vuelve a inicializar (por ejemplo, la tabla de la vista main se recarga
+     * desde la base de datos al volver a ella).
+     * </p>
+     *
+     * @param fxml  nombre del fichero FXML (dentro de {@code views/})
+     * @param title título que se pondrá a la ventana
+     * @throws RuntimeException si no se puede cargar el FXML (envuelve la {@link IOException})
+     */
+    public static void navigateTo(String fxml, String title) {
+        FXMLLoader fxmlLoader = new FXMLLoader(AppG1.class.getResource("views/" + fxml));
         try {
-            scene = new Scene(fxmlLoader.load());
+            Scene scene = new Scene(fxmlLoader.load());
             stage.setTitle(title);
             stage.setScene(scene);
         } catch (IOException e) {
