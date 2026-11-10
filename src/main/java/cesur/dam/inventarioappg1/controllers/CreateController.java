@@ -128,6 +128,6 @@ public class CreateController implements Initializable {
      */
     @FXML
     public void goBack(ActionEvent actionEvent) {
-        SceneNavigator.navigateTo("login-view.fxml","Login");
+        SceneNavigator.navigateTo(SceneNavigator.View.LOGIN);
     }
 }
