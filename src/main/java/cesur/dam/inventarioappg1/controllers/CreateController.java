@@ -2,7 +2,6 @@ package cesur.dam.inventarioappg1.controllers;
 
 import cesur.dam.inventarioappg1.SceneNavigator;
 import cesur.dam.inventarioappg1.models.Equipo;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,7 +12,7 @@ import javafx.scene.control.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class DetailsController implements Initializable {
+public class CreateController implements Initializable {
 
     @FXML
     private Label welcomeText;

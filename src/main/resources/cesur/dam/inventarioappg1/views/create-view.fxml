@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cesur.dam.inventarioappg1.controllers.DetailsController">
+<BorderPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cesur.dam.inventarioappg1.controllers.CreateController">
    <center>
       <VBox alignment="CENTER" maxWidth="445.0" prefHeight="619.0" prefWidth="445.0" spacing="20.0" BorderPane.alignment="CENTER">
           <padding>
