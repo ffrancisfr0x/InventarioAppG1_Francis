@@ -22,8 +22,6 @@ public class CreateController implements Initializable {
     private ChoiceBox<String> choiceCategory;
     @FXML
     private CheckBox chkAvailable;
-    @FXML
-    private Spinner<Integer> spinnerId;
 
 
     /**
@@ -37,7 +35,6 @@ public class CreateController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        spinnerId.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 0,1));
 
         /*
             ChoiceBox  \
@@ -94,7 +91,6 @@ public class CreateController implements Initializable {
         Equipo equipment = new Equipo();
         equipment.setNombre(name);
         equipment.setCategoria(category);
-        equipment.setId(Long.valueOf(spinnerId.getValue()));
         equipment.setDisponible(chkAvailable.isSelected());
 //
 //        table.getItems().add(equipment);
