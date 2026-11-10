@@ -10,6 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class CreateController implements Initializable {
@@ -59,7 +61,7 @@ public class CreateController implements Initializable {
      */
     @FXML
     public void save(ActionEvent actionEvent) {
-        if (hasEmptyFields()) {
+        if (!isValid()) {
             return;
         }
 
@@ -94,8 +96,23 @@ public class CreateController implements Initializable {
      * @return {@code true} si al menos uno de los campos id, nombre, categoría
      *         o disponible está vacío; {@code false} en caso contrario
      */
-    private boolean hasEmptyFields() {
-        return txtName.getText().isEmpty();
+    private boolean isValid() {
+        List<String> errors = new ArrayList<>();
+        if (txtName.getText() == null || txtName.getText().isBlank()) {
+            errors.add("- El nombre es obligatorio.");
+        }
+        if (comboCategory.getValue() == null) {
+            errors.add("- Selecciona una categoría.");
+        }
+        if (!errors.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Datos incorrectos");
+            alert.setHeaderText("Revisa el formulario");
+            alert.setContentText(String.join("\n", errors));
+            alert.showAndWait();
+            return false;
+        }
+        return true;
     }
 
     /**
