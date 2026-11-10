@@ -68,7 +68,7 @@ public class MainController implements Initializable {
 
     @FXML
     public void goBack(ActionEvent actionEvent) {
-        SceneNavigator.navigateTo(SceneNavigator.View.LOGIN);
+        SceneNavigator.navigateTo(SceneNavigator.View.MAIN);
     }
 
     @FXML

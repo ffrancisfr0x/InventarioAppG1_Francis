@@ -62,7 +62,7 @@
                      </ImageView>
                   </graphic>
                </Button>
-               <Button mnemonicParsing="false" onAction="#goBack" text="Volver" />
+               <Button mnemonicParsing="false" onAction="#goBack" text="Cancelar" />
             </children>
          </FlowPane>
       </VBox>
