@@ -36,15 +36,13 @@ public class MainController implements Initializable {
             Long  id = equipment.getId();
             return new SimpleStringProperty(String.valueOf(id));
         });
-        cName.setCellValueFactory( (row)->{
-            if(row.getValue().getNombre().isBlank()){
-                return new SimpleStringProperty("--");
-            } else  {
-                return new SimpleStringProperty(String.valueOf(row.getValue().getNombre()));
-            }
+        cName.setCellValueFactory((row) -> {
+            String nombre = row.getValue().getNombre();
+            return new SimpleStringProperty(nombre == null || nombre.isBlank() ? "--" : nombre);
         });
-        cCategory.setCellValueFactory( (row)->{
-            return new SimpleStringProperty(String.valueOf(row.getValue().getCategoria()).toUpperCase());
+        cCategory.setCellValueFactory((row) -> {
+            String categoria = row.getValue().getCategoria();
+            return new SimpleStringProperty(categoria == null ? "--" : categoria.toUpperCase());
         });
         cAvailability.setCellValueFactory( (row)->{
             var availability = row.getValue().getDisponible();
