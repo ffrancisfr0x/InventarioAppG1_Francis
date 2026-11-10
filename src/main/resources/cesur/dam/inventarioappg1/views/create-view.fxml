@@ -15,6 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ComboBox?>
 <BorderPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cesur.dam.inventarioappg1.controllers.CreateController">
    <center>
       <VBox alignment="CENTER" maxWidth="445.0" prefHeight="619.0" prefWidth="445.0" spacing="20.0" BorderPane.alignment="CENTER">
@@ -41,7 +42,7 @@
          <FlowPane alignment="CENTER">
             <children>
                <Label prefWidth="66.0" text="Categoria" />
-               <ChoiceBox fx:id="choiceCategory" prefWidth="150.0" />
+               <ComboBox fx:id="comboCategory" prefWidth="150.0" promptText="Selecciona una opción" />
             </children>
          </FlowPane>
          <FlowPane alignment="CENTER" layoutX="30.0" layoutY="142.0">

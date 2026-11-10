@@ -19,7 +19,7 @@ public class CreateController implements Initializable {
     @FXML
     private TextField txtName;
     @FXML
-    private ChoiceBox<String> choiceCategory;
+    private ComboBox<String> comboCategory;
     @FXML
     private CheckBox chkAvailable;
 
@@ -43,20 +43,7 @@ public class CreateController implements Initializable {
 
          */
 
-        ObservableList<String> categories = FXCollections.observableArrayList();
-        choiceCategory.setItems(categories);
-
-        categories.add("Keyboard");
-        categories.add("Laptop");
-
-        choiceCategory.getItems().add("Gamepad");
-        choiceCategory.getItems().add("Monitor");
-        choiceCategory.getItems().add("Computer");
-        choiceCategory.getItems().add("Printer");
-
-        choiceCategory.getSelectionModel().selectFirst();
-
-
+        comboCategory.getItems().addAll("Keyboard", "Laptop", "Gamepad", "Monitor", "Computer", "Printer");
     }
 
     /**
@@ -81,7 +68,7 @@ public class CreateController implements Initializable {
         alert.setHeaderText("Guardando");
 
         String name = txtName.getText();
-        String category = choiceCategory.getSelectionModel().getSelectedItem();
+        String category = comboCategory.getValue();
         String available = chkAvailable.isSelected() ? "disponible" : "no disponible";
 
         alert.setContentText(name + " | " + category + " | " + available);
